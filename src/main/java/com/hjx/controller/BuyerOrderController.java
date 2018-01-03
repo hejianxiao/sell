@@ -5,6 +5,7 @@ import com.hjx.dto.OrderDTO;
 import com.hjx.enums.ResultEnum;
 import com.hjx.exception.SellException;
 import com.hjx.form.OrderForm;
+import com.hjx.service.BuyerService;
 import com.hjx.service.OrderService;
 import com.hjx.util.ResultVOUtil;
 import com.hjx.vo.ResultVO;
@@ -31,10 +32,12 @@ import java.util.Map;
 public class BuyerOrderController {
 
     private OrderService orderService;
+    private BuyerService buyerService;
 
     @Autowired
-    public BuyerOrderController(OrderService orderService) {
+    public BuyerOrderController(OrderService orderService, BuyerService buyerService) {
         this.orderService = orderService;
+        this.buyerService = buyerService;
     }
 
     //创建订单
@@ -84,9 +87,7 @@ public class BuyerOrderController {
     public ResultVO detail(@RequestParam("openid") String openid,
                            @RequestParam("orderId") String orderId) {
 
-        //TODO 不安全，验证身份预留
-        OrderDTO orderDTO = orderService.findOne(orderId);
-
+        OrderDTO orderDTO = buyerService.findOrderOne(openid, orderId);
         return ResultVOUtil.success(orderDTO);
     }
 
@@ -95,10 +96,7 @@ public class BuyerOrderController {
     public ResultVO cancel(@RequestParam("openid") String openid,
                            @RequestParam("orderId") String orderId) {
 
-        //TODO 不安全，验证身份预留
-        OrderDTO queryResult = orderService.findOne(orderId);
-        orderService.cancel(queryResult);
-
+        buyerService.cancelOrder(openid, orderId);
         return ResultVOUtil.success();
     }
 

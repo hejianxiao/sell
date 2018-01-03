@@ -10,6 +10,16 @@ spring:
     show-sql: true
   jackson:
     default-property-inclusion: non_null
-server:
-  context-path: /sell
+#server:
+#  context-path: /sell
+
+
+weChat:
+  mpAppId: wxd898fcb01713c658
+  mpAppSecret: 41f98730ba5615a9f8888fbf2c9bde77
+  mchId: 1483469312
+  mchKey: C5245D70627C1F8E9964D494B0735025
+  keyPath: /var/weixin_cert/h5.p12
+  notifyUrl: http://hjx.natapp1.cc/notify
+
 

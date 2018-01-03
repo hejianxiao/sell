@@ -27,7 +27,7 @@ import java.util.List;
 @Slf4j
 public class OrderServiceImplTest {
 
-    private final String BUYER_OPENID = "123456openid";
+    private final String BUYER_OPENID = "oTgZpwQs3APeRwtNramWQzRA1cfo";
 
     private final String ORDERID = "1514252911437928739";
 
@@ -46,10 +46,10 @@ public class OrderServiceImplTest {
         List<OrderDetail> orderDetailList = new ArrayList<>();
         OrderDetail orderDetail1 = new OrderDetail();
         orderDetail1.setProductId("123456");
-        orderDetail1.setProductQuantity(100);
+        orderDetail1.setProductQuantity(1);
         OrderDetail orderDetail2 = new OrderDetail();
         orderDetail2.setProductId("123457");
-        orderDetail2.setProductQuantity(4);
+        orderDetail2.setProductQuantity(1);
         orderDetailList.add(orderDetail1);
         orderDetailList.add(orderDetail2);
         orderDTO.setOrderDetailList(orderDetailList);
