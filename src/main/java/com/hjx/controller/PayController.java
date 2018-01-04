@@ -38,7 +38,7 @@ public class PayController {
     public String pay(@RequestParam("openid") String openid,Model model){
         log.info("openid={}",openid);
         //查询订单
-        OrderDTO orderDTO = orderService.findOne("1514971614683647088");
+        OrderDTO orderDTO = orderService.findOne("1515035437181988194");
         if (orderDTO == null) {
             throw new SellException(ResultEnum.ORDER_NOT_EXIST);
         }

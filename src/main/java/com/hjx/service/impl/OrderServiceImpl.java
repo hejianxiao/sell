@@ -14,6 +14,7 @@ import com.hjx.repository.OrderDetailRepository;
 import com.hjx.repository.OrderMasterRepository;
 import com.hjx.repository.ProductInfoRepository;
 import com.hjx.service.OrderService;
+import com.hjx.service.PayService;
 import com.hjx.service.ProductInfoService;
 import com.hjx.util.KeyUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -48,7 +49,15 @@ public class OrderServiceImpl implements OrderService {
     private ProductInfoService productInfoService;
 
     @Autowired
-    public OrderServiceImpl(OrderMasterRepository orderMasterRepository, OrderDetailRepository orderDetailRepository, ProductInfoRepository productInfoRepository, ProductInfoService productInfoService) {
+    private PayService payService;
+
+
+    @Autowired
+    public OrderServiceImpl(OrderMasterRepository orderMasterRepository,
+                            OrderDetailRepository orderDetailRepository,
+                            ProductInfoRepository productInfoRepository,
+                            ProductInfoService productInfoService
+                            ) {
         this.orderMasterRepository = orderMasterRepository;
         this.orderDetailRepository = orderDetailRepository;
         this.productInfoRepository = productInfoRepository;
@@ -155,7 +164,7 @@ public class OrderServiceImpl implements OrderService {
 
         //如果已经支付，给用户退款
         if (orderDTO.getPayStatus().equals(PayStatusEnum.SUCCESS.getCode())) {
-            //TODO
+            payService.refund(orderDTO);
         }
         return orderDTO;
     }
