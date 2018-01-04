@@ -1,7 +1,11 @@
 package com.hjx.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.hjx.dataobject.OrderDetail;
+import com.hjx.enums.OrderStatusEnum;
+import com.hjx.enums.PayStatusEnum;
+import com.hjx.util.EnumUtil;
 import com.hjx.util.serializer.Date2LongSerializer;
 import lombok.Data;
 
@@ -51,4 +55,13 @@ public class OrderDTO {
     /** 订单详情. */
     private List<OrderDetail> orderDetailList;
 
+    @JsonIgnore
+    public OrderStatusEnum getOrderStatusEnum() {
+        return EnumUtil.getByCode(this.orderStatus,OrderStatusEnum.class);
+    }
+
+    @JsonIgnore
+    public PayStatusEnum getPayStatusEnum() {
+        return EnumUtil.getByCode(this.payStatus,PayStatusEnum.class);
+    }
 }

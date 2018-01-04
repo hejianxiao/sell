@@ -46,10 +46,10 @@ public class OrderServiceImplTest {
         List<OrderDetail> orderDetailList = new ArrayList<>();
         OrderDetail orderDetail1 = new OrderDetail();
         orderDetail1.setProductId("123456");
-        orderDetail1.setProductQuantity(1);
+        orderDetail1.setProductQuantity(5);
         OrderDetail orderDetail2 = new OrderDetail();
-        orderDetail2.setProductId("123457");
-        orderDetail2.setProductQuantity(1);
+        orderDetail2.setProductId("222222");
+        orderDetail2.setProductQuantity(4);
         orderDetailList.add(orderDetail1);
         orderDetailList.add(orderDetail2);
         orderDTO.setOrderDetailList(orderDetailList);
@@ -92,6 +92,13 @@ public class OrderServiceImplTest {
         OrderDTO orderDTO = orderService.findOne(ORDERID);
         OrderDTO result = orderService.paid(orderDTO);
         Assert.assertEquals(PayStatusEnum.SUCCESS.getCode(),result.getPayStatus());
+    }
+
+    @Test
+    public void list() throws Exception {
+        PageRequest pageRequest = new PageRequest(0,10);
+        Page<OrderDTO> orderDTOPage = orderService.findList(pageRequest);
+        Assert.assertTrue("查询所有的订单列表",orderDTOPage.getTotalElements() > 0);
     }
 
 }
