@@ -45,7 +45,7 @@ public class WeChatController {
     public String authorize(@RequestParam("returnUrl") String returnUrl) throws UnsupportedEncodingException {
         String url = "http://hjx.natapp1.cc/wechat/userInfo";
         String redirectUrl = wxMpService.oauth2buildAuthorizationUrl(url,
-                WxConsts.OAuth2Scope.SNSAPI_BASE, URLEncoder.encode(returnUrl,"UTF-8"));
+                WxConsts.OAUTH2_SCOPE_BASE, URLEncoder.encode(returnUrl,"UTF-8"));
 
         return "redirect:" + redirectUrl;
     }
