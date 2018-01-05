@@ -16,6 +16,7 @@ import com.hjx.repository.ProductInfoRepository;
 import com.hjx.service.OrderService;
 import com.hjx.service.PayService;
 import com.hjx.service.ProductInfoService;
+import com.hjx.service.WebSocket;
 import com.hjx.util.KeyUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -48,6 +49,8 @@ public class OrderServiceImpl implements OrderService {
 
     private ProductInfoService productInfoService;
 
+    private WebSocket webSocket;
+
     @Autowired
     private PayService payService;
 
@@ -56,12 +59,14 @@ public class OrderServiceImpl implements OrderService {
     public OrderServiceImpl(OrderMasterRepository orderMasterRepository,
                             OrderDetailRepository orderDetailRepository,
                             ProductInfoRepository productInfoRepository,
-                            ProductInfoService productInfoService
+                            ProductInfoService productInfoService,
+                            WebSocket webSocket
                             ) {
         this.orderMasterRepository = orderMasterRepository;
         this.orderDetailRepository = orderDetailRepository;
         this.productInfoRepository = productInfoRepository;
         this.productInfoService = productInfoService;
+        this.webSocket = webSocket;
     }
 
     @Override
@@ -102,6 +107,9 @@ public class OrderServiceImpl implements OrderService {
             new CartDTO(e.getProductId(),e.getProductQuantity())
         ).collect(Collectors.toList());
         productInfoService.decreaseStock(cartDTOList);
+
+        //发送webSocket消息
+        webSocket.sendMessage(orderDTO.getOrderId());
 
         return orderDTO;
     }
