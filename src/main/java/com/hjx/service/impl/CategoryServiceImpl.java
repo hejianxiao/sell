@@ -4,6 +4,7 @@ import com.hjx.dataobject.ProductCategory;
 import com.hjx.repository.ProductCategoryRepository;
 import com.hjx.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,8 +29,8 @@ public class CategoryServiceImpl implements CategoryService{
     }
 
     @Override
-    public List<ProductCategory> findAll() {
-        return repository.findAll();
+    public List<ProductCategory> findAll(Sort sort) {
+        return repository.findAll(sort);
     }
 
     @Override

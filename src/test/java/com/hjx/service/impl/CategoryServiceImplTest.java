@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
@@ -34,7 +35,8 @@ public class CategoryServiceImplTest {
 
     @Test
     public void findAll() throws Exception {
-        List<ProductCategory> list = categoryService.findAll();
+        Sort sort = new Sort(Sort.Direction.ASC,"categoryType");
+        List<ProductCategory> list = categoryService.findAll(sort);
         Assert.assertNotEquals(0,list.size());
     }
 

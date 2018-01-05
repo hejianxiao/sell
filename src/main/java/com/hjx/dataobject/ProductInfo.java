@@ -40,15 +40,15 @@ public class ProductInfo {
     private String productIcon;
 
     /** 状态. */
-    private Integer productStatus;
+    private Integer productStatus = ProductStatusEnum.UP.getCode();
 
     /** 类目编号. */
     private Integer categoryType;
 
-    /** 类目编号. */
+    /** 创建时间. */
     private Date createTime;
 
-    /** 类目编号. */
+    /** 修改时间. */
     private Date updateTime;
 
     @JsonIgnore
