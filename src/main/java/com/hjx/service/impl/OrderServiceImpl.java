@@ -10,6 +10,7 @@ import com.hjx.enums.OrderStatusEnum;
 import com.hjx.enums.PayStatusEnum;
 import com.hjx.enums.ResultEnum;
 import com.hjx.exception.SellException;
+import com.hjx.exception.SpecialException;
 import com.hjx.repository.OrderDetailRepository;
 import com.hjx.repository.OrderMasterRepository;
 import com.hjx.repository.ProductInfoRepository;
@@ -81,7 +82,8 @@ public class OrderServiceImpl implements OrderService {
         for (OrderDetail orderDetail : orderDTO.getOrderDetailList()) {
             ProductInfo productInfo = productInfoRepository.findOne(orderDetail.getProductId());
             if(productInfo == null){
-                throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);
+//                throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);
+                throw new SpecialException();
             }
             orderAmount = productInfo.getProductPrice()
                     .multiply(new BigDecimal(orderDetail.getProductQuantity()))
