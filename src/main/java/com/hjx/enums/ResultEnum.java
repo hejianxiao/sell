@@ -36,7 +36,11 @@ public enum ResultEnum {
 
     USER_LOGIN_ERROR(27,"登录失败"),
 
-    USER_LOGOUT_SUCCESS(28,"登出成功");
+    USER_LOGOUT_SUCCESS(28,"登出成功"),
+
+    ACTIVITY_END(100,"活动结束"),
+
+    SECKILL_LOCK_ERROR(101,"没秒到，嘿嘿，换个姿势再试试");
 
     private Integer code;
     private String msg;
